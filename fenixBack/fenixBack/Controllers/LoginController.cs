@@ -11,10 +11,10 @@ namespace fenixBack.Controllers
     public class LoginController : ApiController
     {
         [HttpPost]
-        public Usuario Post([FromBody] string email, [FromBody] string senha)
+        public Usuario Post([FromBody] Usuario usuarioBody)
         {
             abrigofenixEntities1 entities = new abrigofenixEntities1();
-            var usuarioLogado = entities.Usuario.FirstOrDefault(usuario => usuario.email.Equals(email) && usuario.senha.Equals(senha));
+            var usuarioLogado = entities.Usuario.FirstOrDefault(usuario => usuario.email.Equals(usuarioBody.email) && usuario.senha.Equals(usuarioBody.senha));
 
             if (usuarioLogado == null)
                 return null;
