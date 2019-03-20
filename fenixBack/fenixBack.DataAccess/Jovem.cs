@@ -7,26 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace fenixBack.DataAccess
+using System;
+using System.Collections.Generic;
+
+public partial class Jovem
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Jovem
-    {
-        public int id { get; set; }
-        public string nome { get; set; }
-        public Nullable<int> idade { get; set; }
-        public string possuiTranstorno { get; set; }
-        public string descricaoTranstorno { get; set; }
-        public string descricaoEstadoSaude { get; set; }
-        public string sexo { get; set; }
-        public Nullable<System.DateTime> dataNascimento { get; set; }
-        public Nullable<bool> ligadoDesligado { get; set; }
-        public string RG { get; set; }
-        public string CPF { get; set; }
-        public string endereco { get; set; }
-        public Nullable<System.DateTime> dataEntrada { get; set; }
-        public Nullable<System.DateTime> dataSaida { get; set; }
-    }
+    public int id { get; set; }
+    public string nome { get; set; }
+    public Nullable<int> idade { get; set; }
+    public string possuiTranstorno { get; set; }
+    public string descricaoTranstorno { get; set; }
+    public string descricaoEstadoSaude { get; set; }
+    public string sexo { get; set; }
+    public Nullable<System.DateTime> dataNascimento { get; set; }
+    public Nullable<bool> ligadoDesligado { get; set; }
+    public string RG { get; set; }
+    public string CPF { get; set; }
+    public Nullable<System.DateTime> dataEntrada { get; set; }
+    public Nullable<System.DateTime> dataSaida { get; set; }
+    public string cep { get; set; }
+    public string rua { get; set; }
+    public string numero { get; set; }
+    public string bairro { get; set; }
+    public string responsavel { get; set; }
+    public string outroResponsavel { get; set; }
+    public string nomeResponsavel { get; set; }
+    public string motivoSaida { get; set; }
 }

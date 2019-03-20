@@ -7,15 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace fenixBack.DataAccess
+using System;
+using System.Collections.Generic;
+
+public partial class Administrador
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Administrador
-    {
-        public int Usuario_Id { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
-    }
+    public int Usuario_Id { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
 }

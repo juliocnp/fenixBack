@@ -26,9 +26,16 @@
           <Property Name="ligadoDesligado" Type="bit" />
           <Property Name="RG" Type="varchar" MaxLength="45" />
           <Property Name="CPF" Type="varchar" MaxLength="45" />
-          <Property Name="endereco" Type="varchar" MaxLength="255" />
           <Property Name="dataEntrada" Type="datetime" />
           <Property Name="dataSaida" Type="datetime" />
+          <Property Name="cep" Type="varchar" MaxLength="9" />
+          <Property Name="rua" Type="varchar" MaxLength="50" />
+          <Property Name="numero" Type="varchar" MaxLength="50" />
+          <Property Name="bairro" Type="varchar" MaxLength="50" />
+          <Property Name="responsavel" Type="varchar" MaxLength="50" />
+          <Property Name="outroResponsavel" Type="varchar" MaxLength="50" />
+          <Property Name="nomeResponsavel" Type="varchar" MaxLength="50" />
+          <Property Name="motivoSaida" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -88,9 +95,16 @@
           <Property Name="ligadoDesligado" Type="Boolean" />
           <Property Name="RG" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="CPF" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="endereco" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="dataEntrada" Type="DateTime" Precision="3" />
           <Property Name="dataSaida" Type="DateTime" Precision="3" />
+          <Property Name="cep" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="rua" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="responsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="outroResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomeResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="motivoSaida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -141,6 +155,14 @@
           <EntitySetMapping Name="Jovem">
             <EntityTypeMapping TypeName="abrigofenixModel.Jovem">
               <MappingFragment StoreEntitySet="Jovem">
+                <ScalarProperty Name="motivoSaida" ColumnName="motivoSaida" />
+                <ScalarProperty Name="nomeResponsavel" ColumnName="nomeResponsavel" />
+                <ScalarProperty Name="outroResponsavel" ColumnName="outroResponsavel" />
+                <ScalarProperty Name="responsavel" ColumnName="responsavel" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="rua" ColumnName="rua" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="idade" ColumnName="idade" />
@@ -152,7 +174,6 @@
                 <ScalarProperty Name="ligadoDesligado" ColumnName="ligadoDesligado" />
                 <ScalarProperty Name="RG" ColumnName="RG" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
                 <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
                 <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
               </MappingFragment>
