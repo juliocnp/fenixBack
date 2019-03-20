@@ -19,11 +19,6 @@ namespace fenixBack.Controllers
             if (usuarioLogado == null)
                 return null;
 
-            if (entities.Administrador.FirstOrDefault(adm => adm.Usuario_Id.Equals(usuarioLogado.id)) != null)
-                usuarioLogado.tipoUsuario = "Administrador";
-            else
-                usuarioLogado.tipoUsuario = "Usuario";
-
             return usuarioLogado;
         }
     }
