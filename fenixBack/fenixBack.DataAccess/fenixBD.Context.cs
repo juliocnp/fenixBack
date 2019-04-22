@@ -28,5 +28,6 @@ namespace fenixBack.DataAccess
         public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<Jovem> Jovem { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Visita> Visita { get; set; }
     }
 }

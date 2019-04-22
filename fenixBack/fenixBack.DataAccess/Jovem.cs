@@ -7,30 +7,42 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class Jovem
+namespace fenixBack.DataAccess
 {
-    public int id { get; set; }
-    public string nome { get; set; }
-    public Nullable<int> idade { get; set; }
-    public string possuiTranstorno { get; set; }
-    public string descricaoTranstorno { get; set; }
-    public string descricaoEstadoSaude { get; set; }
-    public string sexo { get; set; }
-    public Nullable<System.DateTime> dataNascimento { get; set; }
-    public Nullable<bool> ligadoDesligado { get; set; }
-    public string RG { get; set; }
-    public string CPF { get; set; }
-    public Nullable<System.DateTime> dataEntrada { get; set; }
-    public Nullable<System.DateTime> dataSaida { get; set; }
-    public string cep { get; set; }
-    public string rua { get; set; }
-    public string numero { get; set; }
-    public string bairro { get; set; }
-    public string responsavel { get; set; }
-    public string outroResponsavel { get; set; }
-    public string nomeResponsavel { get; set; }
-    public string motivoSaida { get; set; }
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Jovem
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Jovem()
+        {
+            this.Visita = new HashSet<Visita>();
+        }
+    
+        public int id { get; set; }
+        public string nome { get; set; }
+        public Nullable<int> idade { get; set; }
+        public string possuiTranstorno { get; set; }
+        public string descricaoTranstorno { get; set; }
+        public string descricaoEstadoSaude { get; set; }
+        public string sexo { get; set; }
+        public Nullable<System.DateTime> dataNascimento { get; set; }
+        public Nullable<bool> ligadoDesligado { get; set; }
+        public string RG { get; set; }
+        public string CPF { get; set; }
+        public Nullable<System.DateTime> dataEntrada { get; set; }
+        public Nullable<System.DateTime> dataSaida { get; set; }
+        public string cep { get; set; }
+        public string rua { get; set; }
+        public string numero { get; set; }
+        public string bairro { get; set; }
+        public string responsavel { get; set; }
+        public string outroResponsavel { get; set; }
+        public string nomeResponsavel { get; set; }
+        public string motivoSaida { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visita> Visita { get; set; }
+    }
 }

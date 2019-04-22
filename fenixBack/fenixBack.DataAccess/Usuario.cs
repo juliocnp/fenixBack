@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class Usuario
+namespace fenixBack.DataAccess
 {
-    public int id { get; set; }
-    public string nome { get; set; }
-    public string email { get; set; }
-    public string senha { get; set; }
-    public Nullable<System.DateTime> data_nascimento { get; set; }
-    public string tipoUsuario { get; set; }
-
-    public virtual Administrador Administrador { get; set; }
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Usuario
+    {
+        public int id { get; set; }
+        public string nome { get; set; }
+        public string email { get; set; }
+        public string senha { get; set; }
+        public Nullable<System.DateTime> data_nascimento { get; set; }
+        public string tipoUsuario { get; set; }
+    
+        public virtual Administrador Administrador { get; set; }
+    }
 }

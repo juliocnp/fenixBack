@@ -75,6 +75,9 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>fenixBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Visita.cs">
+      <DependentUpon>fenixBD.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

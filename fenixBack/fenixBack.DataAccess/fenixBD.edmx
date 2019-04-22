@@ -48,6 +48,32 @@
           <Property Name="data_nascimento" Type="datetime" />
           <Property Name="tipoUsuario" Type="varchar" MaxLength="45" />
         </EntityType>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="idVisita" />
+          </Key>
+          <Property Name="idVisita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomeVisitante" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="cpfVisitante" Type="varchar" MaxLength="20" />
+          <Property Name="TELVisitante" Type="varchar" MaxLength="20" />
+          <Property Name="dataVisita" Type="date" Nullable="false" />
+          <Property Name="horaVisita" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idJovemVisitado" Type="int" />
+          <Property Name="numOrdemJudicial" Type="int" />
+          <Property Name="tipoVisita" Type="smallint" />
+        </EntityType>
+        <Association Name="FK__Visita__idJovemV__71D1E811">
+          <End Role="Jovem" Type="Self.Jovem" Multiplicity="0..1" />
+          <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jovem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="idJovemVisitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Administrador_Usuario1">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
@@ -64,6 +90,11 @@
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jovem" EntityType="Self.Jovem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="Self.FK__Visita__idJovemV__71D1E811">
+            <End Role="Jovem" EntitySet="Jovem" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
           <AssociationSet Name="fk_Administrador_Usuario1" Association="Self.fk_Administrador_Usuario1">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Administrador" EntitySet="Administrador" />
@@ -105,6 +136,7 @@
           <Property Name="outroResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nomeResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="motivoSaida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Visita" Relationship="abrigofenixModel.FK__Visita__idJovemV__71D1E811" FromRole="Jovem" ToRole="Visita" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -138,7 +170,39 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
+          <EntitySet Name="Visita" EntityType="abrigofenixModel.Visita" />
+          <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="abrigofenixModel.FK__Visita__idJovemV__71D1E811">
+            <End Role="Jovem" EntitySet="Jovem" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="idVisita" />
+          </Key>
+          <Property Name="idVisita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomeVisitante" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cpfVisitante" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TELVisitante" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dataVisita" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="horaVisita" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idJovemVisitado" Type="Int32" />
+          <Property Name="numOrdemJudicial" Type="Int32" />
+          <Property Name="tipoVisita" Type="Int16" />
+          <NavigationProperty Name="Jovem" Relationship="abrigofenixModel.FK__Visita__idJovemV__71D1E811" FromRole="Visita" ToRole="Jovem" />
+        </EntityType>
+        <Association Name="FK__Visita__idJovemV__71D1E811">
+          <End Type="abrigofenixModel.Jovem" Role="Jovem" Multiplicity="0..1" />
+          <End Type="abrigofenixModel.Visita" Role="Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jovem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="idJovemVisitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -188,6 +252,21 @@
                 <ScalarProperty Name="senha" ColumnName="senha" />
                 <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
                 <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visita">
+            <EntityTypeMapping TypeName="abrigofenixModel.Visita">
+              <MappingFragment StoreEntitySet="Visita">
+                <ScalarProperty Name="tipoVisita" ColumnName="tipoVisita" />
+                <ScalarProperty Name="numOrdemJudicial" ColumnName="numOrdemJudicial" />
+                <ScalarProperty Name="idJovemVisitado" ColumnName="idJovemVisitado" />
+                <ScalarProperty Name="horaVisita" ColumnName="horaVisita" />
+                <ScalarProperty Name="dataVisita" ColumnName="dataVisita" />
+                <ScalarProperty Name="TELVisitante" ColumnName="TELVisitante" />
+                <ScalarProperty Name="cpfVisitante" ColumnName="cpfVisitante" />
+                <ScalarProperty Name="nomeVisitante" ColumnName="nomeVisitante" />
+                <ScalarProperty Name="idVisita" ColumnName="idVisita" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
