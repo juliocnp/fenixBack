@@ -53,6 +53,12 @@
     <Compile Include="Administrador.cs">
       <DependentUpon>fenixBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Estoque.cs">
+      <DependentUpon>fenixBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstoqueCat.cs">
+      <DependentUpon>fenixBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="fenixBD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

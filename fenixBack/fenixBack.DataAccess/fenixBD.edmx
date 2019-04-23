@@ -11,6 +11,23 @@
           </Key>
           <Property Name="Usuario_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Estoque">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="dataValidade" Type="datetime" />
+          <Property Name="unidade" Type="int" />
+        </EntityType>
+        <EntityType Name="EstoqueCat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomeCategoria" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="Jovem">
           <Key>
             <PropertyRef Name="id" />
@@ -62,6 +79,18 @@
           <Property Name="numOrdemJudicial" Type="int" />
           <Property Name="tipoVisita" Type="smallint" />
         </EntityType>
+        <Association Name="FK__Estoque__idCateg__76969D2E">
+          <End Role="EstoqueCat" Type="Self.EstoqueCat" Multiplicity="1" />
+          <End Role="Estoque" Type="Self.Estoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstoqueCat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Visita__idJovemV__71D1E811">
           <End Role="Jovem" Type="Self.Jovem" Multiplicity="0..1" />
           <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
@@ -88,9 +117,15 @@
         </Association>
         <EntityContainer Name="abrigofenixModelStoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstoqueCat" EntityType="Self.EstoqueCat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jovem" EntityType="Self.Jovem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Estoque__idCateg__76969D2E" Association="Self.FK__Estoque__idCateg__76969D2E">
+            <End Role="EstoqueCat" EntitySet="EstoqueCat" />
+            <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
           <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="Self.FK__Visita__idJovemV__71D1E811">
             <End Role="Jovem" EntitySet="Jovem" />
             <End Role="Visita" EntitySet="Visita" />
@@ -175,6 +210,12 @@
             <End Role="Jovem" EntitySet="Jovem" />
             <End Role="Visita" EntitySet="Visita" />
           </AssociationSet>
+          <EntitySet Name="Estoque" EntityType="abrigofenixModel.Estoque" />
+          <EntitySet Name="EstoqueCat" EntityType="abrigofenixModel.EstoqueCat" />
+          <AssociationSet Name="FK__Estoque__idCateg__76969D2E" Association="abrigofenixModel.FK__Estoque__idCateg__76969D2E">
+            <End Role="EstoqueCat" EntitySet="EstoqueCat" />
+            <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Visita">
           <Key>
@@ -200,6 +241,37 @@
             </Principal>
             <Dependent Role="Visita">
               <PropertyRef Name="idJovemVisitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Estoque">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="descricao" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="dataValidade" Type="DateTime" Precision="3" />
+          <Property Name="unidade" Type="Int32" />
+          <NavigationProperty Name="EstoqueCat" Relationship="abrigofenixModel.FK__Estoque__idCateg__76969D2E" FromRole="Estoque" ToRole="EstoqueCat" />
+        </EntityType>
+        <EntityType Name="EstoqueCat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomeCategoria" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estoque" Relationship="abrigofenixModel.FK__Estoque__idCateg__76969D2E" FromRole="EstoqueCat" ToRole="Estoque" />
+        </EntityType>
+        <Association Name="FK__Estoque__idCateg__76969D2E">
+          <End Type="abrigofenixModel.EstoqueCat" Role="EstoqueCat" Multiplicity="1" />
+          <End Type="abrigofenixModel.Estoque" Role="Estoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstoqueCat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="idCategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -267,6 +339,25 @@
                 <ScalarProperty Name="cpfVisitante" ColumnName="cpfVisitante" />
                 <ScalarProperty Name="nomeVisitante" ColumnName="nomeVisitante" />
                 <ScalarProperty Name="idVisita" ColumnName="idVisita" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estoque">
+            <EntityTypeMapping TypeName="abrigofenixModel.Estoque">
+              <MappingFragment StoreEntitySet="Estoque">
+                <ScalarProperty Name="unidade" ColumnName="unidade" />
+                <ScalarProperty Name="dataValidade" ColumnName="dataValidade" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstoqueCat">
+            <EntityTypeMapping TypeName="abrigofenixModel.EstoqueCat">
+              <MappingFragment StoreEntitySet="EstoqueCat">
+                <ScalarProperty Name="nomeCategoria" ColumnName="nomeCategoria" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

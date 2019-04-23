@@ -103,12 +103,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\JovemController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\VisitaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Estoque.cs" />
+    <Compile Include="Models\EstoqueCat.cs" />
     <Compile Include="Models\Jovem.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Visita.cs" />

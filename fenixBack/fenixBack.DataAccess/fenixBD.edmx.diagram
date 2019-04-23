@@ -11,6 +11,9 @@
         <AssociationConnector Association="abrigofenixModel.fk_Administrador_Usuario1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="abrigofenixModel.Visita" Width="1.5" PointX="7.25" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="abrigofenixModel.FK__Visita__idJovemV__71D1E811" />
+        <EntityTypeShape EntityType="abrigofenixModel.Estoque" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="abrigofenixModel.EstoqueCat" Width="1.5" PointX="0.75" PointY="7.25" />
+        <AssociationConnector Association="abrigofenixModel.FK__Estoque__idCateg__76969D2E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
