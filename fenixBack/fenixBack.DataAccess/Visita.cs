@@ -23,6 +23,7 @@ namespace fenixBack.DataAccess
         public Nullable<int> idJovemVisitado { get; set; }
         public Nullable<int> numOrdemJudicial { get; set; }
         public Nullable<short> tipoVisita { get; set; }
+        public int Visivel { get; set; }
     
         public virtual Jovem Jovem { get; set; }
     }

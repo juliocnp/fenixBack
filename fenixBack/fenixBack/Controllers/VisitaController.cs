@@ -23,7 +23,6 @@ namespace fenixBack.Controllers
         [Route("api/visita/pesquisar")]
         public List<Visita> Pesquisar([FromBody] Pesquisa dado)
         {
-            /*teste*/
 
             abrigofenixEntities1 entities = new abrigofenixEntities1();
             DateTime dadoAux;
@@ -40,6 +39,21 @@ namespace fenixBack.Controllers
                 visitaList.Add(visitaAux);
                 return visitaList;
             }
+        }
+
+
+        [HttpPost]
+        [Route("api/visita/atualizar")]
+        public bool atualizar([FromBody] Visita visitaInput)
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            var visitaAux = entities.Visita.FirstOrDefault(visita => visita.idVisita == visitaInput.idVisita);
+            if (visitaAux == null)
+                return false;
+            entities.Visita.Remove(visitaAux);
+            entities.Visita.Add(visitaInput);
+            entities.SaveChanges();
+            return true;
         }
     }
 }

@@ -78,6 +78,7 @@
           <Property Name="idJovemVisitado" Type="int" />
           <Property Name="numOrdemJudicial" Type="int" />
           <Property Name="tipoVisita" Type="smallint" />
+          <Property Name="Visivel" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Estoque__idCateg__76969D2E">
           <End Role="EstoqueCat" Type="Self.EstoqueCat" Multiplicity="1" />
@@ -231,6 +232,7 @@
           <Property Name="numOrdemJudicial" Type="Int32" />
           <Property Name="tipoVisita" Type="Int16" />
           <NavigationProperty Name="Jovem" Relationship="abrigofenixModel.FK__Visita__idJovemV__71D1E811" FromRole="Visita" ToRole="Jovem" />
+          <Property Name="Visivel" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK__Visita__idJovemV__71D1E811">
           <End Type="abrigofenixModel.Jovem" Role="Jovem" Multiplicity="0..1" />
@@ -330,6 +332,7 @@
           <EntitySetMapping Name="Visita">
             <EntityTypeMapping TypeName="abrigofenixModel.Visita">
               <MappingFragment StoreEntitySet="Visita">
+                <ScalarProperty Name="Visivel" ColumnName="Visivel" />
                 <ScalarProperty Name="tipoVisita" ColumnName="tipoVisita" />
                 <ScalarProperty Name="numOrdemJudicial" ColumnName="numOrdemJudicial" />
                 <ScalarProperty Name="idJovemVisitado" ColumnName="idJovemVisitado" />

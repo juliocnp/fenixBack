@@ -36,5 +36,7 @@ namespace fenixBack.Models
         public int? numOrdemJudicial { get; set; }
 
         public short? tipoVisita { get; set; }
+        public int? Visivel { get; set; }
+
     }
 }
