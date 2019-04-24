@@ -18,5 +18,14 @@ namespace fenixBack.Controllers
             var estoque = entities.Estoque.ToList();
             return estoque;
         }
+
+        [HttpGet]
+        [Route("api/estoque/listaCategorias")]
+        public List<string> listaCategorias()
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            var estoque = entities.EstoqueCat.ToList();
+            return estoque.Select(x => x.nomeCategoria).ToList();
+        }
     }
 }
