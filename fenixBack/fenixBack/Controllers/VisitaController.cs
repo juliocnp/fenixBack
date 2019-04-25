@@ -55,5 +55,21 @@ namespace fenixBack.Controllers
             entities.SaveChanges();
             return true;
         }
+
+
+
+        [HttpPost]
+        [Route("api/visita/inserir")]
+        public bool inserir([FromBody] Visita visitaInput)
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            entities.Visita.Add(visitaInput);
+            entities.SaveChanges();
+            if (entities.Visita.FirstOrDefault(visita => visita.idVisita == visitaInput.idVisita) != null)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

@@ -27,5 +27,32 @@ namespace fenixBack.Controllers
             var estoque = entities.EstoqueCat.ToList();
             return estoque.Select(x => x.nomeCategoria).ToList();
         }
+
+        [HttpPost]
+        [Route("api/estoque/inserir")]
+        public bool inserir([FromBody] Estoque estoqueInput)
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            entities.Estoque.Add(estoqueInput);
+            entities.SaveChanges();
+            if (entities.Estoque.FirstOrDefault(estoque => estoque.id == estoqueInput.id) != null)
+                return true;
+            else
+                return false;
+        }
+
+        [HttpPost]
+        [Route("api/estoque/atualizar")]
+        public bool atualizar([FromBody] Estoque estoqueInput)
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            var estoqueAux = entities.Estoque.FirstOrDefault(estoque => estoque.id == estoqueInput.id);
+            if (estoqueAux == null)
+                return false;
+            entities.Estoque.Remove(estoqueAux);
+            entities.Estoque.Add(estoqueInput);
+            entities.SaveChanges();
+            return true;
+        }
     }
 }
