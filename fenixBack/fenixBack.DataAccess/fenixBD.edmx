@@ -172,7 +172,6 @@
           <Property Name="outroResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nomeResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="motivoSaida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Visita" Relationship="abrigofenixModel.FK__Visita__idJovemV__71D1E811" FromRole="Jovem" ToRole="Visita" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -184,7 +183,6 @@
           <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="data_nascimento" Type="DateTime" Precision="3" />
           <Property Name="tipoUsuario" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Administrador" Relationship="Self.fk_Administrador_Usuario1" FromRole="Usuario" ToRole="Administrador" />
         </EntityType>
         <Association Name="fk_Administrador_Usuario1">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
@@ -263,7 +261,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nomeCategoria" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Estoque" Relationship="abrigofenixModel.FK__Estoque__idCateg__76969D2E" FromRole="EstoqueCat" ToRole="Estoque" />
         </EntityType>
         <Association Name="FK__Estoque__idCateg__76969D2E">
           <End Type="abrigofenixModel.EstoqueCat" Role="EstoqueCat" Multiplicity="1" />

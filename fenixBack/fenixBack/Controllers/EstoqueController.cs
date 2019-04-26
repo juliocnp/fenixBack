@@ -21,12 +21,17 @@ namespace fenixBack.Controllers
 
         [HttpGet]
         [Route("api/estoque/listaCategorias")]
-        public List<string> listaCategorias()
+        public  List <EstoqueCat> listaCategorias()
         {
             abrigofenixEntities1 entities = new abrigofenixEntities1();
-            var estoque = entities.EstoqueCat.ToList();
-            return estoque.Select(x => x.nomeCategoria).ToList();
+            var estoqueCat = entities.EstoqueCat.ToList();
+            //return estoqueCat.Select(x => x.EstoqueCat).ToList();
+            return estoqueCat;
+
+            //return estoqueCat.Select(x => new { x.id, x.nomeCategoria }).ToList();
+
         }
+
 
         [HttpPost]
         [Route("api/estoque/inserir")]

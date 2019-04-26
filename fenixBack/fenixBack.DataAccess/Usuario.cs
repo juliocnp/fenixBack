@@ -20,7 +20,5 @@ namespace fenixBack.DataAccess
         public string senha { get; set; }
         public Nullable<System.DateTime> data_nascimento { get; set; }
         public string tipoUsuario { get; set; }
-    
-        public virtual Administrador Administrador { get; set; }
     }
 }

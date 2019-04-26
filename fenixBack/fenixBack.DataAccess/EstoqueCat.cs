@@ -14,16 +14,7 @@ namespace fenixBack.DataAccess
     
     public partial class EstoqueCat
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EstoqueCat()
-        {
-            this.Estoque = new HashSet<Estoque>();
-        }
-    
         public int id { get; set; }
         public string nomeCategoria { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Estoque> Estoque { get; set; }
     }
 }

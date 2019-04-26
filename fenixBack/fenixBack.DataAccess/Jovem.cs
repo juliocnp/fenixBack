@@ -14,12 +14,6 @@ namespace fenixBack.DataAccess
     
     public partial class Jovem
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Jovem()
-        {
-            this.Visita = new HashSet<Visita>();
-        }
-    
         public int id { get; set; }
         public string nome { get; set; }
         public Nullable<int> idade { get; set; }
@@ -41,8 +35,5 @@ namespace fenixBack.DataAccess
         public string outroResponsavel { get; set; }
         public string nomeResponsavel { get; set; }
         public string motivoSaida { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Visita> Visita { get; set; }
     }
 }
