@@ -66,18 +66,15 @@ namespace fenixBack.Controllers
         {
             abrigofenixEntities1 entities = new abrigofenixEntities1();
             int dadoAux;
-            var estoqueAux = new Estoque();
+            var estoqueAux = new List<Estoque>();
             if (int.TryParse(dado.dado, out dadoAux))
-
-                estoqueAux = entities.Estoque.FirstOrDefault(estoque => estoque.EstoqueCat.id == dadoAux);
-
-
+                estoqueAux = entities.Estoque.Where(estoque => estoque.EstoqueCat.id == dadoAux).ToList();
             if (estoqueAux == null)
                 return entities.Estoque.ToList();
             else
             {
                 var estoqueList = new List<Estoque>();
-                estoqueList.Add(estoqueAux);
+                estoqueList = estoqueAux;
                 return estoqueList;
             }
         }
