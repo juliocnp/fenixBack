@@ -59,5 +59,27 @@ namespace fenixBack.Controllers
             entities.SaveChanges();
             return true;
         }
+
+        [HttpPost]
+        [Route("api/estoque/pesquisarCategoria")]
+        public List<Estoque> Pesquisar([FromBody] Pesquisa dado)
+        {
+            abrigofenixEntities1 entities = new abrigofenixEntities1();
+            int dadoAux;
+            var estoqueAux = new Estoque();
+            if (int.TryParse(dado.dado, out dadoAux))
+
+                estoqueAux = entities.Estoque.FirstOrDefault(estoque => estoque.EstoqueCat.id == dadoAux);
+
+
+            if (estoqueAux == null)
+                return entities.Estoque.ToList();
+            else
+            {
+                var estoqueList = new List<Estoque>();
+                estoqueList.Add(estoqueAux);
+                return estoqueList;
+            }
+        }
     }
 }

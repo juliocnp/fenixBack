@@ -16,5 +16,6 @@ namespace fenixBack.DataAccess
     {
         public int id { get; set; }
         public string nomeCategoria { get; set; }
+        public bool possuiValidade { get; set; }
     }
 }

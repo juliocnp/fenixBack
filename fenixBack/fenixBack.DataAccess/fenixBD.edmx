@@ -27,6 +27,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nomeCategoria" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="possuiValidade" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Jovem">
           <Key>
@@ -261,6 +262,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nomeCategoria" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="possuiValidade" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__Estoque__idCateg__76969D2E">
           <End Type="abrigofenixModel.EstoqueCat" Role="EstoqueCat" Multiplicity="1" />
@@ -356,6 +358,7 @@
           <EntitySetMapping Name="EstoqueCat">
             <EntityTypeMapping TypeName="abrigofenixModel.EstoqueCat">
               <MappingFragment StoreEntitySet="EstoqueCat">
+                <ScalarProperty Name="possuiValidade" ColumnName="possuiValidade" />
                 <ScalarProperty Name="nomeCategoria" ColumnName="nomeCategoria" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

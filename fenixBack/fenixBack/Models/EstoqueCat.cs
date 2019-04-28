@@ -21,5 +21,7 @@ namespace fenixBack.Models
         [Required]
         [StringLength(45)]
         public string nomeCategoria { get; set; }
+
+        public int possuiValidade { get; set; }
     }
 }
