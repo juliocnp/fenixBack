@@ -19,6 +19,20 @@ namespace fenixBack.DataAccess
         public string email { get; set; }
         public string senha { get; set; }
         public Nullable<System.DateTime> data_nascimento { get; set; }
-        public string tipoUsuario { get; set; }
+        public Nullable<int> tipoUsuario { get; set; }
+        public bool ligadoDesligado { get; set; }
+        public string usuario1 { get; set; }
+        public string cpf { get; set; }
+        public string cep { get; set; }
+        public string logradouro { get; set; }
+        public string complemento { get; set; }
+        public string bairro { get; set; }
+        public string localidade { get; set; }
+        public string uf { get; set; }
+        public Nullable<System.DateTime> dataEntrada { get; set; }
+        public Nullable<System.DateTime> dataSaida { get; set; }
+        public string sexo { get; set; }
+    
+        public virtual TipoUsuario TipoUsuario1 { get; set; }
     }
 }

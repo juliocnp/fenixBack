@@ -113,6 +113,7 @@
     <Compile Include="Models\Estoque.cs" />
     <Compile Include="Models\EstoqueCat.cs" />
     <Compile Include="Models\Jovem.cs" />
+    <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Visita.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +135,9 @@
       <Project>{9702a39d-e3c3-44b3-bc9d-e85c0681e2cc}</Project>
       <Name>fenixBack.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

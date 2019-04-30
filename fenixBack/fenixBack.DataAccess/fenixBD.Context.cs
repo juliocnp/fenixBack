@@ -25,11 +25,11 @@ namespace fenixBack.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<Jovem> Jovem { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visita> Visita { get; set; }
         public virtual DbSet<Estoque> Estoque { get; set; }
         public virtual DbSet<EstoqueCat> EstoqueCat { get; set; }
+        public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

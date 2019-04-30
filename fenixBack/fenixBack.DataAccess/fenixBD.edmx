@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="abrigofenixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Administrador">
-          <Key>
-            <PropertyRef Name="Usuario_Id" />
-          </Key>
-          <Property Name="Usuario_Id" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Estoque">
           <Key>
             <PropertyRef Name="id" />
@@ -55,6 +49,13 @@
           <Property Name="nomeResponsavel" Type="varchar" MaxLength="50" />
           <Property Name="motivoSaida" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="id" />
@@ -64,7 +65,19 @@
           <Property Name="email" Type="varchar" MaxLength="255" />
           <Property Name="senha" Type="varchar" MaxLength="45" />
           <Property Name="data_nascimento" Type="datetime" />
-          <Property Name="tipoUsuario" Type="varchar" MaxLength="45" />
+          <Property Name="tipoUsuario" Type="int" />
+          <Property Name="ligadoDesligado" Type="bit" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="cep" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="logradouro" Type="varchar" MaxLength="300" />
+          <Property Name="complemento" Type="varchar" MaxLength="300" />
+          <Property Name="bairro" Type="varchar" MaxLength="300" />
+          <Property Name="localidade" Type="varchar" MaxLength="300" />
+          <Property Name="uf" Type="varchar" MaxLength="5" />
+          <Property Name="dataEntrada" Type="datetime" />
+          <Property Name="dataSaida" Type="datetime" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="Visita">
           <Key>
@@ -93,6 +106,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Usuario__tipoUsu__03F0984C">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="tipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Visita__idJovemV__71D1E811">
           <End Role="Jovem" Type="Self.Jovem" Multiplicity="0..1" />
           <End Role="Visita" Type="Self.Visita" Multiplicity="*" />
@@ -105,49 +130,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Administrador_Usuario1">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Administrador">
-              <PropertyRef Name="Usuario_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="abrigofenixModelStoreContainer">
-          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstoqueCat" EntityType="Self.EstoqueCat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jovem" EntityType="Self.Jovem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Visita" EntityType="Self.Visita" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Estoque__idCateg__76969D2E" Association="Self.FK__Estoque__idCateg__76969D2E">
             <End Role="EstoqueCat" EntitySet="EstoqueCat" />
             <End Role="Estoque" EntitySet="Estoque" />
           </AssociationSet>
+          <AssociationSet Name="FK__Usuario__tipoUsu__03F0984C" Association="Self.FK__Usuario__tipoUsu__03F0984C">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
           <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="Self.FK__Visita__idJovemV__71D1E811">
             <End Role="Jovem" EntitySet="Jovem" />
             <End Role="Visita" EntitySet="Visita" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Administrador_Usuario1" Association="Self.fk_Administrador_Usuario1">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="abrigofenixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Administrador">
-          <Key>
-            <PropertyRef Name="Usuario_Id" />
-          </Key>
-          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.fk_Administrador_Usuario1" FromRole="Administrador" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="Jovem">
           <Key>
             <PropertyRef Name="id" />
@@ -174,37 +180,8 @@
           <Property Name="nomeResponsavel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="motivoSaida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="data_nascimento" Type="DateTime" Precision="3" />
-          <Property Name="tipoUsuario" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="fk_Administrador_Usuario1">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Administrador">
-              <PropertyRef Name="Usuario_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="abrigofenixEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Administrador" EntityType="Self.Administrador" />
           <EntitySet Name="Jovem" EntityType="Self.Jovem" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="fk_Administrador_Usuario1" Association="Self.fk_Administrador_Usuario1">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Administrador" EntitySet="Administrador" />
-          </AssociationSet>
           <EntitySet Name="Visita" EntityType="abrigofenixModel.Visita" />
           <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="abrigofenixModel.FK__Visita__idJovemV__71D1E811">
             <End Role="Jovem" EntitySet="Jovem" />
@@ -215,6 +192,12 @@
           <AssociationSet Name="FK__Estoque__idCateg__76969D2E" Association="abrigofenixModel.FK__Estoque__idCateg__76969D2E">
             <End Role="EstoqueCat" EntitySet="EstoqueCat" />
             <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
+          <EntitySet Name="TipoUsuario" EntityType="abrigofenixModel.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="abrigofenixModel.Usuario" />
+          <AssociationSet Name="FK__Usuario__tipoUsu__03F0984C" Association="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Visita">
@@ -276,19 +259,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="data_nascimento" Type="DateTime" Precision="3" />
+          <Property Name="tipoUsuario" Type="Int32" />
+          <Property Name="ligadoDesligado" Type="Boolean" Nullable="false" />
+          <Property Name="usuario1" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="logradouro" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="complemento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="localidade" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="uf" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="dataEntrada" Type="DateTime" Precision="3" />
+          <Property Name="dataSaida" Type="DateTime" Precision="3" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="TipoUsuario1" Relationship="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C" FromRole="Usuario" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK__Usuario__tipoUsu__03F0984C">
+          <End Type="abrigofenixModel.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
+          <End Type="abrigofenixModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="tipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="abrigofenixModelStoreContainer" CdmEntityContainer="abrigofenixEntities1">
-          <EntitySetMapping Name="Administrador">
-            <EntityTypeMapping TypeName="abrigofenixModel.Administrador">
-              <MappingFragment StoreEntitySet="Administrador">
-                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Jovem">
             <EntityTypeMapping TypeName="abrigofenixModel.Jovem">
               <MappingFragment StoreEntitySet="Jovem">
@@ -313,18 +332,6 @@
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
                 <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="abrigofenixModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="senha" ColumnName="senha" />
-                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
-                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -360,6 +367,38 @@
               <MappingFragment StoreEntitySet="EstoqueCat">
                 <ScalarProperty Name="possuiValidade" ColumnName="possuiValidade" />
                 <ScalarProperty Name="nomeCategoria" ColumnName="nomeCategoria" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="abrigofenixModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="abrigofenixModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
+                <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="localidade" ColumnName="localidade" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="ligadoDesligado" ColumnName="ligadoDesligado" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
