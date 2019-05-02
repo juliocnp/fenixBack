@@ -10,34 +10,21 @@ namespace fenixBack.Controllers
 {
     public class EstoqueController: ApiController
     {
+        abrigofenixEntities1 entities = new abrigofenixEntities1();
+
         [HttpGet]
-        [Route("api/estoque/lista")]
+        [Route("api/estoque/")]
         public List<Estoque> listaEstoque()
-        {
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
+        {       
             var estoque = entities.Estoque.ToList();
             return estoque;
         }
 
-        [HttpGet]
-        [Route("api/estoque/listaCategorias")]
-        public  List <EstoqueCat> listaCategorias()
-        {
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
-            var estoqueCat = entities.EstoqueCat.ToList();
-            //return estoqueCat.Select(x => x.EstoqueCat).ToList();
-            return estoqueCat;
-
-            //return estoqueCat.Select(x => new { x.id, x.nomeCategoria }).ToList();
-
-        }
-
 
         [HttpPost]
-        [Route("api/estoque/inserir")]
+        [Route("api/estoque/")]
         public bool inserir([FromBody] Estoque estoqueInput)
         {
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
             entities.Estoque.Add(estoqueInput);
             entities.SaveChanges();
             if (entities.Estoque.FirstOrDefault(estoque => estoque.id == estoqueInput.id) != null)
@@ -46,25 +33,32 @@ namespace fenixBack.Controllers
                 return false;
         }
 
-        [HttpPost]
-        [Route("api/estoque/atualizar")]
+        [HttpPut]
+        [Route("api/estoque/")]
         public bool atualizar([FromBody] Estoque estoqueInput)
         {
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
             var estoqueAux = entities.Estoque.FirstOrDefault(estoque => estoque.id == estoqueInput.id);
             if (estoqueAux == null)
                 return false;
-            entities.Estoque.Remove(estoqueAux);
-            entities.Estoque.Add(estoqueInput);
+            entities.Entry(estoqueAux).State = System.Data.Entity.EntityState.Modified;
+            entities.Entry(estoqueAux).CurrentValues.SetValues(estoqueInput);
             entities.SaveChanges();
             return true;
+        }
+
+
+        [HttpGet]
+        [Route("api/estoque/Categorias")]
+        public List<EstoqueCat> listaCategorias()
+        {
+            var estoqueCat = entities.EstoqueCat.ToList();
+            return estoqueCat;
         }
 
         [HttpPost]
         [Route("api/estoque/pesquisarCategoria")]
         public List<Estoque> Pesquisar([FromBody] Pesquisa dado)
         {
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
             int dadoAux;
             var estoqueAux = new List<Estoque>();
             if (int.TryParse(dado.dado, out dadoAux))

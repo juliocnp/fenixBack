@@ -106,6 +106,7 @@
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\JovemController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VisitaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
