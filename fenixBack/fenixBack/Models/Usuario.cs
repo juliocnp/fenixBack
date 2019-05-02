@@ -25,14 +25,14 @@ namespace fenixBack.Models
 
         public DateTime? data_nascimento { get; set; }
 
-        public int? tipoUsuario { get; set; }
+        public TipoUsuario tipoUsuario { get; set; }
 
         public bool ligadoDesligado { get; set; }
 
-        [Column("usuario")]
-        [Required]
-        [StringLength(45)]
-        public string usuario1 { get; set; }
+        //[Column("usuario")]
+        //[Required]
+        //[StringLength(45)]
+        //public string usuario1 { get; set; }
 
         [Required]
         [StringLength(45)]
@@ -64,6 +64,6 @@ namespace fenixBack.Models
         [StringLength(1)]
         public string sexo { get; set; }
 
-        public virtual TipoUsuario TipoUsuario1 { get; set; }
+        //public virtual TipoUsuario tipoUsuario { get; set; }
     }
 }

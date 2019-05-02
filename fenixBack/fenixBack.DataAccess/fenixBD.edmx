@@ -277,7 +277,7 @@
           <Property Name="data_nascimento" Type="DateTime" Precision="3" />
           <Property Name="tipoUsuario" Type="Int32" />
           <Property Name="ligadoDesligado" Type="Boolean" Nullable="false" />
-          <Property Name="usuario1" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="usuario1" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="cpf" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cep" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="logradouro" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
@@ -288,7 +288,7 @@
           <Property Name="dataEntrada" Type="DateTime" Precision="3" />
           <Property Name="dataSaida" Type="DateTime" Precision="3" />
           <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="TipoUsuario1" Relationship="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="TipoUsuario" Relationship="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
         <Association Name="FK__Usuario__tipoUsu__03F0984C">
           <End Type="abrigofenixModel.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
