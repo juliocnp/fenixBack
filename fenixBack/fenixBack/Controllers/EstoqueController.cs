@@ -8,10 +8,20 @@ using System.Web.Http;
 
 namespace fenixBack.Controllers
 {
+    /// <summary>
+    /// CRUD do Estoque e Categorias do Estoque
+    /// GET: Pegar/Listar
+    /// POST: Inserir
+    /// PUT: Atulizar
+    /// DELETE: Excluir
+    /// </summary>
+ 
     public class EstoqueController: ApiController
     {
+     
         abrigofenixEntities1 entities = new abrigofenixEntities1();
 
+   
         [HttpGet]
         [Route("api/estoque/")]
         public List<Estoque> listaEstoque()
@@ -46,9 +56,21 @@ namespace fenixBack.Controllers
             return true;
         }
 
+        [HttpDelete]
+        [Route("api/estoque/")]
+        public bool remover([FromBody] Estoque estoqueInput)
+        {
+            entities.Estoque.Attach(estoqueInput);
+            entities.Estoque.Remove(estoqueInput);
+            entities.SaveChanges();
+            if (entities.Estoque.FirstOrDefault(estoque => estoque.id == estoqueInput.id) != null)
+                return true;
+            else
+                return false;
+        }
 
         [HttpGet]
-        [Route("api/estoque/Categorias")]
+        [Route("api/estoque/categoria")]
         public List<EstoqueCat> listaCategorias()
         {
             var estoqueCat = entities.EstoqueCat.ToList();
@@ -56,7 +78,7 @@ namespace fenixBack.Controllers
         }
 
         [HttpPost]
-        [Route("api/estoque/pesquisarCategoria")]
+        [Route("api/estoque/categoria")]
         public List<Estoque> Pesquisar([FromBody] Pesquisa dado)
         {
             int dadoAux;
