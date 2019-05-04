@@ -78,7 +78,7 @@ namespace fenixBack.Controllers
         }
 
         [HttpPost]
-        [Route("api/estoque/categoria")]
+        [Route("api/estoque/GroupItensCategoria")]
         public List<Estoque> Pesquisar([FromBody] Pesquisa dado)
         {
             int dadoAux;
@@ -93,6 +93,18 @@ namespace fenixBack.Controllers
                 estoqueList = estoqueAux;
                 return estoqueList;
             }
+        }
+
+        [HttpPost]
+        [Route("api/estoque/categoria")]
+        public bool inserirCategoria([FromBody] EstoqueCat estoqueInput)
+        {
+            entities.EstoqueCat.Add(estoqueInput);
+            entities.SaveChanges();
+            if (entities.EstoqueCat.FirstOrDefault(estoqueCat => estoqueCat.id == estoqueInput.id) != null)
+                return true;
+            else
+                return false;
         }
     }
 }
