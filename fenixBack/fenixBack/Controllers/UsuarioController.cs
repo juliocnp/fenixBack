@@ -10,16 +10,36 @@ namespace fenixBack.Controllers
 {
     public class UsuarioController : ApiController
     {
-        [HttpPost]
-        [Route("api/usuario/lista")]
+        abrigofenixEntities1 entities = new abrigofenixEntities1();
+
+        [HttpGet]
+        [Route("api/usuario/")]
         public List<Usuario>listUsuario()
             {
-
-            abrigofenixEntities1 entities = new abrigofenixEntities1();
             var usuario = entities.Usuario.ToList();
             return usuario;
       
             }
+
+
+
+        [HttpGet]
+        [Route("api/usuario/tipo")]
+        public List<TipoUsuario> listaTipoUsuario()
+        {
+            var tipoUsuario = entities.TipoUsuario.ToList();
+            return tipoUsuario;
+        }
+
+
+
+
+
+
+
+
+
+
 
     }
 }
