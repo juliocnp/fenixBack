@@ -84,14 +84,5 @@ namespace fenixBack.Controllers
                 return UsuarioList;
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }

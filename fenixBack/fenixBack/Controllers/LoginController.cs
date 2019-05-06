@@ -16,18 +16,22 @@ namespace fenixBack.Controllers
     public class LoginController : ApiController
     {
         [HttpPost]
-        public Usuario Post([FromBody] Login usuarioBody)
+        [Route("api/login")]
+        public Usuario login([FromBody] Login usuarioBody)
         {
-            if (usuarioBody == null)
-                return null;
-
             abrigofenixEntities1 entities = new abrigofenixEntities1();
-            var usuarioLogado = entities.Usuario.FirstOrDefault(usuario => usuario.email.Equals(usuarioBody.email) && usuario.senha.Equals(usuarioBody.senha));
 
-            if (usuarioLogado == null)
-                return null;
+            var usuario = entities.Usuario.FirstOrDefault(u => u.email == usuarioBody.email);
 
-            return usuarioLogado;
+            if (usuario != null)
+            {
+                if (usuario.senha == usuario.senha)
+                {
+                    return usuario;
+                }
+            }
+
+            return null;
         }
     }
 }
