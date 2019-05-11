@@ -20,7 +20,7 @@ namespace fenixBack.DataAccess
         public string senha { get; set; }
         public Nullable<System.DateTime> data_nascimento { get; set; }
         public Nullable<int> tipoUsuario { get; set; }
-        public bool ligadoDesligado { get; set; }
+        public Nullable<bool> ligadoDesligado { get; set; }
         public string usuario1 { get; set; }
         public string cpf { get; set; }
         public string cep { get; set; }
@@ -34,5 +34,6 @@ namespace fenixBack.DataAccess
         public string sexo { get; set; }
     
         public virtual TipoUsuario TipoUsuario { get; set; }
+        public virtual Administrador Administrador { get; set; }
     }
 }

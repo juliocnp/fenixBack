@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="abrigofenixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="Usuario_Id" />
+          </Key>
+          <Property Name="Usuario_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CAIXA">
+          <Key>
+            <PropertyRef Name="ID_TRANSACAO" />
+          </Key>
+          <Property Name="ID_TRANSACAO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DATA" Type="date" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="VALOR" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="Estoque">
           <Key>
             <PropertyRef Name="id" />
@@ -66,10 +81,10 @@
           <Property Name="senha" Type="varchar" MaxLength="45" />
           <Property Name="data_nascimento" Type="datetime" />
           <Property Name="tipoUsuario" Type="int" />
-          <Property Name="ligadoDesligado" Type="bit" Nullable="false" />
-          <Property Name="usuario" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="cpf" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="cep" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ligadoDesligado" Type="bit" />
+          <Property Name="usuario" Type="varchar" MaxLength="45" />
+          <Property Name="cpf" Type="varchar" MaxLength="45" />
+          <Property Name="cep" Type="varchar" MaxLength="45" />
           <Property Name="logradouro" Type="varchar" MaxLength="300" />
           <Property Name="complemento" Type="varchar" MaxLength="300" />
           <Property Name="bairro" Type="varchar" MaxLength="300" />
@@ -130,7 +145,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Administrador_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="abrigofenixModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAIXA" EntityType="Self.CAIXA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstoqueCat" EntityType="Self.EstoqueCat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jovem" EntityType="Self.Jovem" Schema="dbo" store:Type="Tables" />
@@ -148,6 +177,10 @@
           <AssociationSet Name="FK__Visita__idJovemV__71D1E811" Association="Self.FK__Visita__idJovemV__71D1E811">
             <End Role="Jovem" EntitySet="Jovem" />
             <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Administrador_Usuario1" Association="Self.fk_Administrador_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -199,6 +232,12 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <EntitySet Name="Administrador" EntityType="abrigofenixModel.Administrador" />
+          <AssociationSet Name="fk_Administrador_Usuario1" Association="abrigofenixModel.fk_Administrador_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <EntitySet Name="CAIXA" EntityType="abrigofenixModel.CAIXA" />
         </EntityContainer>
         <EntityType Name="Visita">
           <Key>
@@ -276,10 +315,10 @@
           <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="data_nascimento" Type="DateTime" Precision="3" />
           <Property Name="tipoUsuario" Type="Int32" />
-          <Property Name="ligadoDesligado" Type="Boolean" Nullable="false" />
-          <Property Name="usuario1" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="cpf" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="cep" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ligadoDesligado" Type="Boolean" />
+          <Property Name="usuario1" MaxLength="45" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="cpf" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="logradouro" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="complemento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="bairro" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
@@ -289,6 +328,7 @@
           <Property Name="dataSaida" Type="DateTime" Precision="3" />
           <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Administrador" Relationship="abrigofenixModel.fk_Administrador_Usuario1" FromRole="Usuario" ToRole="Administrador" />
         </EntityType>
         <Association Name="FK__Usuario__tipoUsu__03F0984C">
           <End Type="abrigofenixModel.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
@@ -302,6 +342,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="Usuario_Id" />
+          </Key>
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="abrigofenixModel.fk_Administrador_Usuario1" FromRole="Administrador" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="fk_Administrador_Usuario1">
+          <End Type="abrigofenixModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="abrigofenixModel.Administrador" Role="Administrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CAIXA">
+          <Key>
+            <PropertyRef Name="ID_TRANSACAO" />
+          </Key>
+          <Property Name="ID_TRANSACAO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -400,6 +468,23 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="abrigofenixModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAIXA">
+            <EntityTypeMapping TypeName="abrigofenixModel.CAIXA">
+              <MappingFragment StoreEntitySet="CAIXA">
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="ID_TRANSACAO" ColumnName="ID_TRANSACAO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

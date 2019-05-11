@@ -31,5 +31,7 @@ namespace fenixBack.DataAccess
         public virtual DbSet<EstoqueCat> EstoqueCat { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Administrador> Administrador { get; set; }
+        public virtual DbSet<CAIXA> CAIXA { get; set; }
     }
 }
