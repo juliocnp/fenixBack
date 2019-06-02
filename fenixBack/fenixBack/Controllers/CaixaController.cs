@@ -26,7 +26,7 @@ namespace fenixBack.Controllers
         abrigofenixEntities1 entities = new abrigofenixEntities1();
 
         [HttpGet]
-        [Route("api/caixa/")]
+        [Route("api/CAIXA/")]
         public List<CAIXA> listaCaixa()
         {
             var caixa = entities.CAIXA.ToList();
