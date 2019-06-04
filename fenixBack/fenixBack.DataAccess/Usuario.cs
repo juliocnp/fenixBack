@@ -32,6 +32,7 @@ namespace fenixBack.DataAccess
         public Nullable<System.DateTime> dataEntrada { get; set; }
         public Nullable<System.DateTime> dataSaida { get; set; }
         public string sexo { get; set; }
+        public string cargo { get; set; }
     
         public virtual TipoUsuario TipoUsuario { get; set; }
         public virtual Administrador Administrador { get; set; }

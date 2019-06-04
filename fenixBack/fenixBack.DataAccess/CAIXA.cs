@@ -18,5 +18,6 @@ namespace fenixBack.DataAccess
         public System.DateTime DATA { get; set; }
         public string DESCRICAO { get; set; }
         public decimal VALOR { get; set; }
+        public string tipoTransacao { get; set; }
     }
 }

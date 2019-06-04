@@ -19,6 +19,7 @@
           <Property Name="DATA" Type="date" Nullable="false" />
           <Property Name="DESCRICAO" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="VALOR" Type="money" Nullable="false" />
+          <Property Name="tipoTransacao" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Estoque">
           <Key>
@@ -93,6 +94,7 @@
           <Property Name="dataEntrada" Type="datetime" />
           <Property Name="dataSaida" Type="datetime" />
           <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="cargo" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="Visita">
           <Key>
@@ -329,6 +331,7 @@
           <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="abrigofenixModel.FK__Usuario__tipoUsu__03F0984C" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Administrador" Relationship="abrigofenixModel.fk_Administrador_Usuario1" FromRole="Usuario" ToRole="Administrador" />
+          <Property Name="cargo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Usuario__tipoUsu__03F0984C">
           <End Type="abrigofenixModel.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
@@ -369,6 +372,7 @@
           <Property Name="DATA" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="VALOR" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="tipoTransacao" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -450,6 +454,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="abrigofenixModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
                 <ScalarProperty Name="sexo" ColumnName="sexo" />
                 <ScalarProperty Name="dataSaida" ColumnName="dataSaida" />
                 <ScalarProperty Name="dataEntrada" ColumnName="dataEntrada" />
@@ -481,6 +486,7 @@
           <EntitySetMapping Name="CAIXA">
             <EntityTypeMapping TypeName="abrigofenixModel.CAIXA">
               <MappingFragment StoreEntitySet="CAIXA">
+                <ScalarProperty Name="tipoTransacao" ColumnName="tipoTransacao" />
                 <ScalarProperty Name="VALOR" ColumnName="VALOR" />
                 <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
                 <ScalarProperty Name="DATA" ColumnName="DATA" />
